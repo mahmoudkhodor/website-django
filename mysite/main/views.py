@@ -7,4 +7,4 @@ from .models import Tutorial
 def homepage(request):
     return HttpResponse(request=request,
                         template_name="main/home.html",
-                        context={"tutorials": Tutorial.objects.all})
+                        context={"tutorials": Tutorial.object.all})

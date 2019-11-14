@@ -120,3 +120,15 @@ modify the view to show the models
 ```
 
 ## Styling and CSS
+
+We are going to user css framework called Materialize, so we add the below code to the head of the home page
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+/>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+```
