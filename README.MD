@@ -1,4 +1,6 @@
-#My Site
+# Python Tutorial website
+
+## Getting Started
 
 install Django
 
@@ -27,6 +29,8 @@ py manage.py runserver
 
 ![boilerplat](reademeimages/boilerplate.PNG)
 
+## Routes
+
 Add the below code to the urls.py to create a route for the emply url
 
 ```python
@@ -37,6 +41,8 @@ app_name = "main"
 urlpatterns = [
     path("", views.homepage, name="homepage"),
 ```
+
+## Create Models
 
 create a model, a tutorial table, we need to edit the file models.py
 
@@ -63,6 +69,8 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+## Admin Page
+
 Create and admin page, for that we need an admin user
 
 ```bash
@@ -83,3 +91,32 @@ from .models import Tutorial
 
 admin.site.register(Tutorial)
 ```
+
+## Views and Templates
+
+Install a text editor called tinymce4-lite
+
+```bash
+pip install django-tinymce4-lite
+```
+
+![texteditor](reademeimages/texteditor.PNG)
+
+modify the view to show the models
+
+```python
+<head>
+  {% load static %} <link href="{%static 'tinymce/css/prism.css'%}"
+  rel="stylesheet"
+</head>
+<body>
+  {% for tut in tutorials %}
+  <p>{{tut.tutorial_title}}</p>
+  <p>{{tut.tutorial_published}}</p>
+  <p>{{tut.tutorial_content|safe}}</p>
+  {% endfor %}
+</body>
+<script src="{% static 'tinymce/js/prism.js' %}"></script>
+```
+
+## Styling and CSS
