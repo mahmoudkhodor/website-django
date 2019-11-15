@@ -262,3 +262,11 @@ class NewUserForm(UserCreationForm):
                 user.save()
             return user
 ```
+
+
+![HomePage](reademeimages/samplewebsite.PNG)
+
+## Dynamic Sidebar
+
+![HomePage](reademeimages/dynamicsidebar.PNG)
+
