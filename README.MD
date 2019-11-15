@@ -186,6 +186,7 @@ from django.contrib import messages
             for msg in form.error_messages:
                 messages.error(request, f"{msg}:form.error_messages[msg]")
 ```
+
 use a toast from Materialized 
 
 ```python
@@ -196,4 +197,68 @@ use a toast from Materialized
       displayLenght: 2000
     });
   </script>
-  ```
+```
+
+## User Login and Logout 
+
+Add a path for logout view
+
+```python
+path("logout/", views.logout_request, name="logout"),
+```
+
+Add a logout view
+
+```python
+def logout_request(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect("main:homepage")
+```
+
+Add a path for login view
+
+```python
+path("logout/", views.login_request, name="login"),
+```
+
+Add a login view
+
+```python
+def login_request(request):
+
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data('username')
+            password = form.cleaned_data('password')
+            user = authenticate(username, password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, "")
+
+    form = AuthenticationForm()
+    return render(request, "main/login.html", {"form": form})
+```
+
+create a new form
+
+```python
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import UserCreationForm
+
+class NewUserForm(UserCreationForm):
+    email=forms.EmailField(required=True)
+
+    class Meta:
+        model=User
+        fields=("username","email","password1","password2")
+        
+        def save(self,commit=True):
+            user=super(NewUserForm,self).save(commit=False)
+            user.email=self.cleaned_data['email']
+            if commit:
+                user.save()
+            return user
+```
