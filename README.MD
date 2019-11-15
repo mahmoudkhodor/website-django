@@ -170,3 +170,30 @@ path("register/", views.register, name="register")
 ![HomePage](reademeimages/register.PNG)
 
 ## Messages and Includes
+
+include a library then use it to create messages
+```python
+from django.contrib import messages
+
+
+  if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f"New Account Created: {}")
+            login(request, user)
+            return redirect("main:homepage")
+        else:
+            for msg in form.error_messages:
+                messages.error(request, f"{msg}:form.error_messages[msg]")
+```
+use a toast from Materialized 
+
+```python
+<script>
+    M.toast({
+      html: '{{message}}',
+      classes: 'blue rounded',
+      displayLenght: 2000
+    });
+  </script>
+  ```
