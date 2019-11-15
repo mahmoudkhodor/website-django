@@ -132,3 +132,41 @@ We are going to user css framework called Materialize, so we add the below code 
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 ```
+Add Navbar and cards
+
+![HomePage](reademeimages/homepage.PNG)
+
+we need to modify something in particular in the materialize framework, for that reason we download the SASS files from [Here](http://materializecss.com/getting-started.html), then we download Koala from [Here](https://koala-app.com) to compile the SASS.
+
+Choose the modificaiton that you need to do then compile the SASS file using Koala.
+
+## User Registration
+
+create a new webpage for registration and a new view
+
+register.html
+```html
+{% extends "main/header.html" %} {% block content%}
+<form method="POST">
+  {% csrf_token %}
+  {{ form }}
+</form>
+if you already have an account, <a href="/login">login</a> instead. {%endblock%}
+```
+
+add it to view.py
+
+```python
+def register(request):
+    form = UserCreationForm
+    return render(request, "main/register.html", context={"from": form})
+```
+
+add it to urls.py
+
+```python
+path("register/", views.register, name="register")
+```
+![HomePage](reademeimages/register.PNG)
+
+## Messages and Includes
